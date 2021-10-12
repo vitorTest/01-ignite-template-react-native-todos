@@ -19,15 +19,6 @@ interface TasksListProps {
 }
 
 export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps) {
-
-  function handleRemoveTask(id: number){
-    removeTask(id);
-  }
-
-  function handleToggleDone(id: number){
-    toggleTaskDone(id);
-  }
-
   return (
     <FlatList
       data={tasks}
@@ -42,11 +33,10 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
                 testID={`button-${index}`}
                 activeOpacity={0.7}
                 style={styles.taskButton}
-                onPress={()=> handleToggleDone(item.id)}
+                onPress={()=>  toggleTaskDone(item.id)}
               >
                 <View 
                   testID={`marker-${index}`}
-                  //TODO - use style prop 
                   style={item.done ? styles.taskMarkerDone : styles.taskMarker}
                 >
                   { item.done && (
@@ -58,7 +48,6 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
                   )}
                 </View>
                 <Text 
-                  //TODO - use style prop
                   style={item.done ? styles.taskTextDone : styles.taskText}
                 >
                   {item.title}
@@ -69,7 +58,7 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
             <TouchableOpacity
               testID={`trash-${index}`}
               style={{ paddingHorizontal: 24 }}
-              onPress={() => handleRemoveTask(item.id)}
+              onPress={() => removeTask(item.id)}
             >
               <Image source={trashIcon} />
             </TouchableOpacity>

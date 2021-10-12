@@ -20,13 +20,13 @@ export function Home() {
   }
 
   function handleToggleTaskDone(id: number) {
-    let list = tasks.slice()
-    tasks.forEach(task=>{
-      if(task.id == id){
+    const updatedTasks = tasks.slice();
+    tasks.forEach(task => {
+      if(task.id === id){
         task.done = !task.done
       }
     })
-    setTasks(list);
+    setTasks(updatedTasks);
   }
 
   function handleRemoveTask(id: number) {
