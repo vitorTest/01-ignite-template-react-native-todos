@@ -19,9 +19,14 @@ interface TasksListProps {
 }
 
 export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps) {
+
+  function handleRemoveTask(id: number){
+    removeTask(id);
+  }
+
   return (
     <FlatList
-      // data={tasks}
+      data={tasks}
       keyExtractor={item => String(item.id)}
       contentContainerStyle={{ paddingBottom: 24 }}
       showsVerticalScrollIndicator={false}
@@ -33,19 +38,25 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
                 testID={`button-${index}`}
                 activeOpacity={0.7}
                 style={styles.taskButton}
-                //TODO - use onPress (toggle task) prop
+                onPress={()=>{console.log(index)}}
               >
                 <View 
                   testID={`marker-${index}`}
                   //TODO - use style prop 
                 >
-                  { item.done && (
+                  {/* { item.done && (
                     <Icon 
                       name="check"
                       size={12}
                       color="#FFF"
                     />
-                  )}
+                  )} */}
+                  {/* { item.done} */}
+                  <Icon 
+                      name="check"
+                      size={12}
+                      color="#FFF"
+                    />
                 </View>
 
                 <Text 
@@ -59,7 +70,7 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
             <TouchableOpacity
               testID={`trash-${index}`}
               style={{ paddingHorizontal: 24 }}
-              //TODO - use onPress (remove task) prop
+              onPress={() => handleRemoveTask(item.id)}
             >
               <Image source={trashIcon} />
             </TouchableOpacity>
