@@ -24,6 +24,10 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
     removeTask(id);
   }
 
+  function handleToggleDone(id: number){
+    toggleTaskDone(id);
+  }
+
   return (
     <FlatList
       data={tasks}
@@ -38,29 +42,24 @@ export function TasksList({ tasks, toggleTaskDone, removeTask }: TasksListProps)
                 testID={`button-${index}`}
                 activeOpacity={0.7}
                 style={styles.taskButton}
-                onPress={()=>{console.log(index)}}
+                onPress={()=> handleToggleDone(item.id)}
               >
                 <View 
                   testID={`marker-${index}`}
                   //TODO - use style prop 
+                  style={item.done ? styles.taskMarkerDone : styles.taskMarker}
                 >
-                  {/* { item.done && (
+                  { item.done && (
                     <Icon 
                       name="check"
                       size={12}
                       color="#FFF"
                     />
-                  )} */}
-                  {/* { item.done} */}
-                  <Icon 
-                      name="check"
-                      size={12}
-                      color="#FFF"
-                    />
+                  )}
                 </View>
-
                 <Text 
                   //TODO - use style prop
+                  style={item.done ? styles.taskTextDone : styles.taskText}
                 >
                   {item.title}
                 </Text>
